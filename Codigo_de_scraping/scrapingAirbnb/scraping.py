@@ -89,7 +89,7 @@ try:
         # Redirigir a la siguiente página
         try:
             onClickSiguientePagina = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "//a[contains(@aria-label, 'Siguiente') or contains(@aria-label, 'Next')]"))
+                EC.element_to_be_clickable((By.XPATH, "//a[contains(@aria-label, 'Siguiente') or contains(@aria-label, 'Next') or contains(@aria-label, 'Next page')]"))
             )
             onClickSiguientePagina.click()
             current_page += 1

@@ -1,3 +1,4 @@
+0.- Instalar el navegador Firefox la version 131.0.3
 1.- Instalar las siguientes librerías
 	pip install selenium webdriver-manager pandas
 2.- Selenium 
