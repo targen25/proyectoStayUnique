@@ -1,0 +1,37 @@
+1.- Instalar las siguientes librerías
+	pip install selenium webdriver-manager pandas
+2.- Selenium 
+	Abre una nueva instancia de un browser determinado, asi poder manipular la página que se quiere controlar
+3.- Webdriver-manager
+	Es para descargar automáticamente el controlador del navegador que se está usando junto a la versión de selenium	
+4.- Pandas
+	Para cargar la lista del resultado del scraping en un dataFrame y esto grabarlo en csv
+5.- Con Selenium (con WebDriver, como Firefox), abre un navegador real (Firefox) asi simular la interacción como si fuese
+	un usuario real. Aquí se está trabajando con el navegador Firefox
+6.- Se trae información de la ruta: https://www.airbnb.com/s/Barcelona--Spain/homes
+7.- Se captura todos los divs de la página principal que contienen un identificador (itemListElement)
+8.- Se recorre la lista de elementos que se encontró en el punto 6
+9.- En cada iteración se extrae los siguientes campos que son: Nombre propiedad, precio, puntuación, reseña, dirección y número de habitaciones
+10.- Los 4 primeros campos que son: Nombre propiedad, precio, puntuación y reseña, se extrae de la página principal
+11.- Por cada iteración se abre una pestaña de la página detalle de la habitación
+11.- Una vez que se encuentra en la página detalle, se extrae los dos 2 campos dirección y número de habitaciones
+12.- Esos datos requeridos se asigna a un objeto
+13.- Ese objeto se agrega a una lista
+14.- Se Cierra la pestaña de la página detalle que se abrió en el punto 11
+15.- Se vuelve a la primera pestaña adonde se encuentra la página principal
+16.- Se redirige a la siguiente página, por medio de la librería webDriver, donde simulamos hacer click en el botón de siguiente página
+17.- El proceso vuelve a cargar los datos de la siguiente página, así comienza el proceso nuevamente en el punto 7
+18.- Una vez que se llegó al límite del número máximo de paginación, la lista acumulada (punto 13) se convierte a un dataFrame de pandas
+19.- Finalmente el dataFrame de lista acumulada, se guarda como cvs en la ruta del proyecto, con el nombre de "airbnbBarcelonaScraping.csv"
+
+DESAFIOS
+1.- Donde tuve cierta complicación fue en acceder a la página detalle por cada iteración, así poder extraer la dirección y número de cuartos, luego volver a la página principal.
+	En muchos intentos no se actualizaba la página, si bien estaba abierto la pestaña de la página detalle, pero la url seguía apuntando a la página principal,
+	entonces cuando sacaba información de la página detalle me decía el ELEMENTO QUE ESTAS BUSCANDO NO SE ENCUENTRA, entonces investigando en internet finalmente encontré
+	cómo se puede actualizar la url, una vez actualizada la url y con la librería WebDriverWait se pudo extraer la información de la página detalle
+2.- El otro desafío fue la paginación, pero eso se solucionó con la libreria WebDriverWait, donde se simula el click para ir a la siguiente página
+
+
+
+
+

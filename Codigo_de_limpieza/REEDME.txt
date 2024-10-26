@@ -1,0 +1,28 @@
+********Configuración del entorno*****
+1.- Abrir databrick community
+2.- Crear una carpeta con el nombre de "tables" en "Catalog/DBFS"
+3.- Cargar los archivos enviados para la evaluación (Bookings.csv y Properties.csv) en "Catalog/DBFS/tables", haciendo click en Upload
+4.- Entrar a workspace que esta en el panel izquierdo, una vez que abra la ventana, click derecho en medio de la ventana y seleccionar importar
+5.- Buscar el archivo "ETL-EDA-Stay-Unique.sql" que se encuentra descargado en su PC local, después de haber clonado la rama de github
+
+********Ejecutar los scripts*****
+1.- Ejecutar celda por celda el archivo importado, en donde primero se creara la base de datos, las vista, luego las transformaciones 
+	se grabarán en una tabla persisten en la base de datos creada
+
+********Detalles de decisiones de limpieza de datos*****
+Tabla Booking:
+1.- Los campos Adults,Children, Infants, RoomRate, CleaningFee, Revenue, ADR y TouristTax deben ser números enteros no pueden contener valores nullos, 
+	si en algún momento se realiza una operación matemática con esos valores, se tendría problemas.
+2.- Los campos Persons, NumNights y TotalPaid, por ningún motivo puede ser menor a cero, de lo contrario, si en algún momento se realiza
+	algún calculo con esos campos, el resultado sería incoherente, no puede existir número de personas con valor negativo o el pago total sea negativo, no tiene sentido
+3.- Los campos ArrivalDate, DepartureDate y Channel deben tener valores diferentes a null, no tiene sentido que una fecha de llegada o salida sea null. Del mismo modo con Channel,
+	tiene que contener algún valor coherente, de lo contrario no sé sabría el origen del channel
+
+Tabla Propertie:
+1.- Los campos Square, Capacity y NumBedrooms tienen que ser mayores a cero, no tiene sentido que sean menores a cero, no puede existir NumBedrooms menor a cero, es algo absurdo
+2.- Los campos RealProperty y PropertyType tienen que tener algún valor, de lo contrario no vale la pena tomarlos en cuenta, no nos ayudaría en ninguna decisión
+
+********Descripción del pipeline de ETL implementado*****
+1.- Se realizo la ingesta o la extracción de datos en las vistas de vistaBooking y vistaPropertie
+2.- Se realizo la limpieza y transformación en las vistas vistaBooking y vistaPropertie, para luego insertarlos en las tablas tablaBooking y tablaPropertie
+3.- Se hizo un match o una combinación entre las tablas tablaBooking y tablaPropertie por "PropertyId" y ese resultado se cargó en la tabla "tablaBookingCharacteristic"

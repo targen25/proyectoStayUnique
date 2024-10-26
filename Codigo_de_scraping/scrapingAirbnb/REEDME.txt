@@ -1,0 +1,3 @@
+EL documento del proceso de scraping esta en: 
+
+PROCESO-SCRAPING.txt
